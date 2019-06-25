@@ -6,13 +6,14 @@ class InputHandler {
             switch(e.keyCode) {
                 case 37:        // left
                 case 65:
-                    snoo.moveLeft();
+                    this.snoo.moveLeft();
                     break;
                 case 39:        // right
                 case 68:
-                    snoo.moveRight();
+                    this.snoo.moveRight();
                     break;
                 case 32:        // shoot
+                    this.snoo.shoot();
                     break;
             }
         });
@@ -20,11 +21,11 @@ class InputHandler {
             switch(e.keyCode) {
                 case 37:        // left
                 case 65:
-                    if (snoo.speed < 0) snoo.stop();
+                    if (this.snoo.speed < 0) this.snoo.stop();
                     break;
                 case 39:        // right
                 case 68:
-                    if (snoo.speed > 0) snoo.stop();
+                    if (this.snoo.speed > 0) this.snoo.stop();
                     break;
             }
         });

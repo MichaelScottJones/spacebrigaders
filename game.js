@@ -5,11 +5,11 @@ class Game {
     }
 
     start() {
-        this.snoo = new Snoo(gameWidth, gameHeight);
+        this.snoo = new Snoo(this);
         new InputHandler(this.snoo);
 
         this.gameObjects = [
-            snoo
+            this.snoo
         ]
     }
 

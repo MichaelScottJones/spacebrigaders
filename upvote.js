@@ -16,6 +16,6 @@ class Upvote {
     }
 
     update() {
-
+        this.position.y -= this.speed;
     }
 }
