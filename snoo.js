@@ -27,13 +27,13 @@ class Snoo {
     }
 
     shoot() {
-        let v = new Upvote(this.position.x, this.position.y, this.game.gameHeight);
+        let v = new Upvote(this.position.x, this.position.y);
         this.votes.push(v);
     }
 
     draw(ctx) {
         ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
-        this.votes.forEach((vote) => {
+        this.votes.forEach(vote => {
             vote.draw(ctx);
         });
     }
@@ -46,8 +46,14 @@ class Snoo {
         if (this.position.x + this.width > this.game.gameWidth - 10) {
             this.position.x = this.game.gameWidth - this.width - 10;
         }
-        this.votes.forEach((vote) => {
-            vote.update(dt);
-        });
+        let newVotes = [];
+        while(this.votes.length > 0) {
+            let v = this.votes.pop();
+            let nv = v.update();
+            if (nv) {
+                newVotes.push(nv);
+            }
+        }
+        this.votes = newVotes;
     }
 }

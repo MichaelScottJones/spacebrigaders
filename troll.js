@@ -1,7 +1,7 @@
 // export default class Troll {
 class Troll {
-    constructor(x, y, gameWidth) {
-        this.gameWidth = gameWidth;
+    constructor(x, y, game) {
+        this.game = game;
         this.img = document.getElementById("troll");
         this.width = 40;
         this.height = 40;
@@ -20,8 +20,4 @@ class Troll {
     update() {
 
     }
-}
-
-function initializeAllTrolls(gameWidth) {
-
 }

@@ -1,6 +1,5 @@
 class Upvote {
-    constructor(x, y, gameHeight) {
-        this.gameHeight = gameHeight;
+    constructor(x, y) {
         this.img = document.getElementById("upvote");
         this.width = 30;
         this.height = 30;
@@ -17,5 +16,7 @@ class Upvote {
 
     update() {
         this.position.y -= this.speed;
+        // check collision with top
+        return this.position.y < 0 - this.height ? null : this;
     }
 }
