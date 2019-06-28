@@ -4,11 +4,12 @@ class Downvote {
         this.img = document.getElementById("downvote");
         this.width = 30;
         this.height = 30;
+        this.shouldDelete = false;
         this.position = {
             x: x,
             y: y
         };1
-        this.speed = -3;
+        this.speed = 3;
     }
 
     draw(ctx) {
@@ -18,6 +19,6 @@ class Downvote {
     update() {
         this.position.y += this.speed;
         // check collision with bottom
-        return this.position.y < 0 - this.gameHeight ? null : this;
+        return this.position.y > this.gameHeight || this.shouldDelete ? null : this;
     }
 }

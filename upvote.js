@@ -3,6 +3,7 @@ class Upvote {
         this.img = document.getElementById("upvote");
         this.width = 30;
         this.height = 30;
+        this.shouldDelete = false;
         this.position = {
             x: x,
             y: y
@@ -17,6 +18,6 @@ class Upvote {
     update() {
         this.position.y -= this.speed;
         // check collision with top
-        return this.position.y < 0 - this.height ? null : this;
+        return this.position.y < 0 - this.height || this.shouldDelete ? null : this;
     }
 }

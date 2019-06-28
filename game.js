@@ -2,11 +2,12 @@ class Game {
     constructor(w, h) {
         this.gameWidth = w;
         this.gameHeight = h;
+        this.level = 1;
     }
 
     start() {
         this.snoo = new Snoo(this);
-        this.trolls = new Trolls(this, 100);
+        this.trolls = new Trolls(this, 50);
         new InputHandler(this.snoo);
 
         this.gameObjects = [
