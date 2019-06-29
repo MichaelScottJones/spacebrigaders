@@ -12,6 +12,7 @@ class Snoo {
         this.maxSpeed = 5;
         this.speed = 0;
         this.votes = [];
+        this.lives = 3;
     }
 
     moveLeft() {
@@ -64,6 +65,11 @@ class Snoo {
             if (this.checkCollision(vote)) {
                 vote.shouldDelete = true;
                 this.img = document.getElementById("snoo_sad");
+            }
+        });
+        this.game.trolls.trolls.forEach(troll => {
+            if (this.checkCollision(troll)) {
+                this.img = document.getElementById("snoo_scream");
             }
         });
     }
