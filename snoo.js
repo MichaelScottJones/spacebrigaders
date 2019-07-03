@@ -3,6 +3,7 @@ class Snoo {
     constructor(game) {
         this.game = game;
         this.img = document.getElementById("snoo");
+        this.lifeImg = document.getElementById("snoo_smile");
         this.width = 40;
         this.height = 40;
         this.position = {
@@ -30,6 +31,26 @@ class Snoo {
     shoot() {
         let v = new Upvote(this.position.x, this.position.y);
         this.votes.push(v);
+    }
+
+    publishLives() {
+        game.statsCtx.clearRect(0, 0, 800, 50);
+        document.getElementById("lifeCounter").innerHTML = this.lives;
+        if (this.lives >= 3) {
+            this.lifeImg = document.getElementById("snoo_smile");
+        } else if (this.lives == 2) {
+            this.lifeImg = document.getElementById("snoo_surprised");
+        } else if (this.lives == 1) {
+            this.lifeImg = document.getElementById("snoo_scream");
+        } else {
+            this.img = document.getElementById("snoo_sad");
+        }
+        for (let i=0; i<this.lives; i++) {
+            game.statsCtx.drawImage(
+                this.lifeImg, (10*(i+1))+(i*this.width),
+                5, this.height, this.width
+            );
+        }
     }
 
     draw(ctx) {
@@ -64,12 +85,14 @@ class Snoo {
         this.game.trolls.votes.forEach(vote => {
             if (this.checkCollision(vote)) {
                 vote.shouldDelete = true;
-                this.img = document.getElementById("snoo_sad");
+                this.lives--;
+                this.publishLives();
             }
         });
         this.game.trolls.trolls.forEach(troll => {
             if (this.checkCollision(troll)) {
-                this.img = document.getElementById("snoo_scream");
+                this.lives--;
+                this.publishLives();
             }
         });
     }

@@ -8,7 +8,7 @@ class Downvote {
         this.position = {
             x: x,
             y: y
-        };1
+        };
         this.speed = 3;
     }
 

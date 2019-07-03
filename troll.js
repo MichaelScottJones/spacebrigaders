@@ -23,9 +23,10 @@ class Troll {
     update(dt) {
         let hit = false;
         this.game.snoo.votes.forEach(vote => {
-            if (this.checkCollision(vote)) {
+            if (this.checkCollision(vote) && !vote.shouldDelete) {
                 hit = true;
                 vote.shouldDelete = true;
+                // this.game.level += .1;
             }
         });
         if (hit) return null;
