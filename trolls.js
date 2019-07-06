@@ -55,6 +55,10 @@ class Trolls {
             this.changeDirection();
             this.shouldChangeDirection = false;
         }
+
+        if (this.trolls.length <= 0) {
+            this.game.gameOver = true;
+        }
     }
 
     draw(ctx) {

@@ -26,7 +26,7 @@ class Troll {
             if (this.checkCollision(vote) && !vote.shouldDelete) {
                 hit = true;
                 vote.shouldDelete = true;
-                // this.game.level += .1;
+                this.game.level += .01;
             }
         });
         if (hit) return null;
@@ -40,11 +40,12 @@ class Troll {
 
     checkCollision(obj) {
         // check if a collision is impossible, invert the result
+        let b = 5;   // hitbox buffer
         return !(
-            obj.position.y > this.position.y + this.height      // too low
-            || obj.position.y + obj.height < this.position.y    // too high
-            || obj.position.x > this.position.x + this.width    // too far right
-            || obj.position.x + obj.width < this.position.x     // too far left
+            obj.position.y + b > this.position.y + this.height - b      // too low
+            || obj.position.y + obj.height - b < this.position.y + b    // too high
+            || obj.position.x + b > this.position.x + this.width - b    // too far right
+            || obj.position.x + obj.width - 5 < this.position.x + b     // too far left
         );
     }
 }

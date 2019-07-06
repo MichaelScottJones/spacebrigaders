@@ -29,8 +29,10 @@ class Snoo {
     }
 
     shoot() {
-        let v = new Upvote(this.position.x, this.position.y);
-        this.votes.push(v);
+        if (!this.game.paused && !this.game.gameOver) {
+            let v = new Upvote(this.position.x, this.position.y);
+            this.votes.push(v);
+        }
     }
 
     publishLives() {
@@ -44,6 +46,7 @@ class Snoo {
             this.lifeImg = document.getElementById("snoo_scream");
         } else {
             this.img = document.getElementById("snoo_sad");
+            this.game.gameOver = true;
         }
         for (let i=0; i<this.lives; i++) {
             game.statsCtx.drawImage(
@@ -84,9 +87,11 @@ class Snoo {
         // check collision
         this.game.trolls.votes.forEach(vote => {
             if (this.checkCollision(vote)) {
+                if (!this.game.gameOver) {
                 vote.shouldDelete = true;
                 this.lives--;
                 this.publishLives();
+                }
             }
         });
         this.game.trolls.trolls.forEach(troll => {
@@ -99,11 +104,12 @@ class Snoo {
 
     checkCollision(obj) {
         // check if a collision is impossible, invert the result
+        let b = 6;   // hitbox buffer
         return !(
-            obj.position.y > this.position.y + this.height      // too low
-            || obj.position.y + obj.height < this.position.y    // too high
-            || obj.position.x > this.position.x + this.width    // too far right
-            || obj.position.x + obj.width < this.position.x     // too far left
+            obj.position.y + b > this.position.y + this.height - b      // too low
+            || obj.position.y + obj.height - b < this.position.y + b    // too high
+            || obj.position.x + b > this.position.x + this.width - b    // too far right
+            || obj.position.x + obj.width - 5 < this.position.x + b     // too far left
         );
     }
 }
