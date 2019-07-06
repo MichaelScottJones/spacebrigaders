@@ -112,4 +112,12 @@ class Snoo {
             || obj.position.x + obj.width - 5 < this.position.x + b     // too far left
         );
     }
+
+    reset() {
+        this.speed = 0;
+        this.votes = [];
+        this.lives = 3;
+        this.position.x = this.game.gameWidth / 2 - this.width / 2,
+        this.img = document.getElementById("snoo");
+    }
 }

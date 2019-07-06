@@ -8,13 +8,13 @@ class Game {
         this.ctx = document.getElementById("gameScreen").getContext("2d");
         this.gameOver = false;
         this.snoo = new Snoo(this);
+        new InputHandler(this);
     }
 
     start() {
         this.gameOver = false;
         this.snoo.votes = [];
         this.trolls = new Trolls(this, 50);
-        new InputHandler(this);
         this.snoo.publishLives();
 
         this.gameObjects = [
@@ -24,10 +24,6 @@ class Game {
     }
 
     update(dt) {
-        if (this.paused) {
-            this.writeState("PAUSED");
-            return;
-        }
         if (this.gameOver) {
             if (this.snoo.lives <= 0) {
                 this.writeState("GAME OVER");
@@ -37,7 +33,10 @@ class Game {
                 this.writeState("LEVEL COMPLETE");
             }
         }
-        
+        if (this.paused) {
+            this.writeState("PAUSED");
+            return;
+        }
         this.gameObjects.forEach(object => {
             object.update(dt);
         });
@@ -66,8 +65,9 @@ class Game {
     }
 
     startNewGame() {
-        this.snoo = new Snoo(this);
+        this.snoo.reset();
         this.level = 1;
+        this.paused = false;
         this.start();
     }
     

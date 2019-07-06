@@ -6,14 +6,15 @@ class InputHandler {
         document.addEventListener("keypress", e => {
             switch(e.keyCode) {
                 case 13:
-                case 16:
                     this.game.paused = !this.game.paused;
+                    console.log("PAUSE");
                     break;
                 case 110:
                     this.game.startNextLevel();
                     break;
                 case 114:
                     this.game.startNewGame();
+                    break;
 
             }
         });
